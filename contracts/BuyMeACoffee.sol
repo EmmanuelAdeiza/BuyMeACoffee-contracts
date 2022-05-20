@@ -30,6 +30,12 @@ contract BuyMeACoffee  {
     //Address of the contract deployer.
     address payable owner;
 
+    modifier onlyOwner(){
+        require(msg.sender==owner, "You are not the owner");
+        _;
+    }
+
+
     //Deploy logic.
     constructor(){
         owner = payable(msg.sender);
@@ -37,9 +43,9 @@ contract BuyMeACoffee  {
 
 
 
-    // function updateOwnerAddress(address new_address) public onlyOwner {
-    //     // owner = payable(new_address);
-    // }
+    function changeOwner(address newOwner) public onlyOwner{
+        owner = payable(newOwner);
+    }
 
     /**
     * @dev buy a coffee for contract owner
